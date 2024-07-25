@@ -11,8 +11,71 @@
     \item Relax probe towards a learned state.
 \end{itemize}
 
-% TODO: Add visualization of autoassociative memory
+\only<1>{
+\begin{center}
+\begin{tikzpicture}
+    \draw (0,0) rectangle (1,4);
+    \node at (0.5,2) {$\xi$};
+    \draw[thick, ->] (1.05,2) --(1.95,2);
 
+    \filldraw[fill=\fillColor, draw=black] (2,0) rectangle (6,4);
+    \node[align=center] at (4,2) {Autoassociative\\Memory};
+    
+    \draw (7,0) rectangle (8,4);
+    \node at (7.5,2) {$\xi$};
+    \draw[thick, ->] (6.05,2) --(6.95,2);
+\end{tikzpicture}
+\end{center}
+}
+
+\only<2>{
+\begin{center}
+    \begin{tikzpicture}
+        \draw (0,0) rectangle (1,4);
+        \node at (0.5,2) {$\xi$};
+        \draw[thick, ->] (1.05,2) --(1.95,2);
+    
+        \filldraw[fill=\fillColor, draw=black] (2,0) -- (4,1.5) -- (4,2.5) --(2,4) -- (2,0);
+        \filldraw[fill=\fillColor, draw=black] (4,1.5) -- (4,2.5) -- (6,4) -- (6,0) -- (4, 1.5);
+        
+        \draw (7,0) rectangle (8,4);
+        \node at (7.5,2) {$\xi$};
+        \draw[thick, ->] (6.05,2) --(6.95,2);
+    \end{tikzpicture}
+\end{center}
+}
+
+\only<3>{
+\begin{center}
+    \begin{tikzpicture}
+        \draw (0,0) rectangle (1,4);
+        \node at (0.5,2) {$\xi$};
+
+        \draw[thick, ->] (1.05,2) --(6.95,2);
+        
+        \draw (7,0) rectangle (8,4);
+        \node at (7.5,2) {$\xi$};
+    \end{tikzpicture}
+\end{center}
+}
+
+\only<4>{
+\begin{center}
+\begin{tikzpicture}
+    \draw (0,0) rectangle (1,4);
+    \node at (0.5,2) {$\xi^\prime$};
+    \draw[thick, ->] (1.05,2) --(1.95,2);
+
+    \filldraw[fill=\fillColor, draw=black] (2,0) rectangle (6,4);
+    \node[align=center] at (4,2) {Autoassociative\\Memory};
+    
+    \draw (7,0) rectangle (8,4);
+    \node at (7.5,2) {$\xi$};
+    \draw[thick, ->] (6.05,2) --(6.95,2);
+\end{tikzpicture}
+\end{center}
+}
+    
 \end{frame}
 
 % --------------------------------------------------------------------------------
