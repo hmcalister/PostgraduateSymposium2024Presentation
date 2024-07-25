@@ -162,26 +162,92 @@
 
 % --------------------------------------------------------------------------------
 
-\begin{frame}
+\begin{frame}[t]
 	
     \frametitle{Modern Hopfield Network}
+    
+    New hyperparameter \(n\) -- the ``interaction vertex''.
     \begin{itemize}
-        \item New hyperparameter \(n\) -- the ``interaction vertex''.
-        \begin{itemize}
-            \item Controls the range of influence that memories have.
-            \item However, also radically alters the network architecture.
-        \end{itemize}
-
-        % TODO: Have visualizations for each of these points comparing either mathematics or visualizations with classical
-        \pause
-        \item Memory matrix replaced by list of memory states -- vectors of same dimension as data.
-        \pause
-        \item Learning no longer supports Hebbian -- now requires gradient descent.
-        \pause
-        \item Relaxation no longer uses mean field -- now a contrastive difference.
-        \begin{itemize}
-            \item Negative energy no longer means ``stable'' -- the energy \textit{difference} between a neuron clamped on and off indicates stability.
-        \end{itemize}
-        
+        \item Controls the range of influence that memories have.
+        \item However, also radically alters the network architecture.
     \end{itemize}
+
+        \only<2>{
+            Memory matrix replaced by list of memory states -- vectors of same dimension as data.
+            
+            \begin{center}
+                \begin{tikzpicture}
+                    \filldraw[fill=\fillColor, draw=black] (0,0) rectangle (4,4);
+                    \node at (2,2) {$\xi \otimes \xi$};
+                    
+                    \draw[thick, ->] (4.05, 2) -- (5.95, 2);
+                    \filldraw[fill=\fillColor, draw=black] (6,0) rectangle (6.8,4);
+                    \node at (6.4, 2) {$\zeta_0$};
+                    \filldraw[fill=\fillColor, draw=black] (7,0) rectangle (7.8,4);
+                    \node at (7.4, 2) {$\zeta_1$};
+                    \filldraw[fill=\fillColor, draw=black] (8,0) rectangle (8.8,4);
+                    \node at (8.4, 2) {$\zeta_2$};
+                    \filldraw[fill=\fillColor, draw=black] (9,0) rectangle (9.8,4);
+                    \node at (9.4, 2) {$\zeta_3$};
+                    \node at (10.3, 2) {\dots};
+                \end{tikzpicture}
+            \end{center}
+        }
+        
+        \only<3>{
+            Relaxation no longer uses mean field -- now a contrastive difference.
+            \begin{itemize}
+                \item Negative energy no longer means ``stable'' -- the energy \textit{difference} between a neuron clamped on and off indicates stability.
+            \end{itemize}
+
+            \begin{center}
+                \begin{tikzpicture}
+                    \node at (-0.5, 2) {$f_n$};
+                    \draw (-0.1, 0) arc (190:170:11.5);
+                    \filldraw[fill=\fillColor, draw=black] (0,0) rectangle (0.8,4);
+                    \node at (0.4, 2) {$\zeta$};
+                    
+                    \filldraw (1, 2) circle (0.04);
+                    
+                    \filldraw[fill=\fillColor, draw=black] (1.2,0) rectangle (2,4);
+                    \fill[fill=green] (1.2,3.2) rectangle (2,3.6);
+                    \node at (1.6, 2) {$\xi_{+1}$};
+                    \draw (2.1, 0) arc (-10:10:11.5);
+                    
+                    \node at (2.7, 2) {$- f_n$};
+                    \draw (3.2, 0) arc (190:170:11.5);
+
+                    \filldraw[fill=\fillColor, draw=black] (3.3,0) rectangle (4.1,4);
+                    \node at (3.7, 2) {$\zeta$};
+
+                    \filldraw (4.3, 2) circle (0.04);
+                    
+                    \filldraw[fill=\fillColor, draw=black] (4.5,0) rectangle (5.3,4);
+                    \fill[fill=red] (4.5,3.2) rectangle (5.3,3.6);
+                    \node at (4.9, 2) {$\xi_{-1}$};
+                    \draw (5.4, 0) arc (-10:10:11.5);
+                \end{tikzpicture}
+            \end{center}
+            
+        }
+
+        \only<4>{
+            Learning no longer supports Hebbian -- now requires gradient descent.
+
+            \begin{gather*}
+             W = \sum_{k} \xi_k \otimes \xi_k \\
+             \text{Loss}\left( \xi \right) = \tanh \left[ \beta \sum_{\mu} \left( f_n \left(\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) - f_n \left( -\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) \right]
+            \end{gather*}
+        }
+
+        \only<5>{
+            Learning no longer supports Hebbian -- now requires gradient descent.
+
+            \begin{gather*}
+             W = \sum_{k} \xi_k \otimes \xi_k \\
+             \text{Loss}\left( \xi \right) = \tanh \left[ \textcolor{red}{\boldsymbol \beta} \sum_{\mu} \left( f_n \left(\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) - f_n \left( -\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) \right]
+            \end{gather*}
+        }
+        
+    
 \end{frame}
