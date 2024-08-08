@@ -1,0 +1,44 @@
+\section{Hyperparameter Search}
+
+\begin{frame}
+% \frametitle{Hyperparameter Search}
+\only<1>{
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth]{images/randomMemories/05.png}
+    \caption{\(n=10\)}
+    \end{figure}
+}
+\only<2>{
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth]{images/randomMemories/06.png}
+    \caption{\(n=15\), \(\beta=600\)}
+    \end{figure}
+}
+\only<3>{
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth]{images/randomMemories/07.png}
+    \caption{\(n=12\), \(\beta=545\), \(\text{lr}=0.01\)}
+    \end{figure}
+}
+\only<4>{
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth]{images/randomMemories/08.png}
+    \caption{\(n=17\), \(\beta=730\), \(\text{lr}=1.0\), \(\text{lr}_\text{decay}=0.99\)}
+    \end{figure}
+}
+\only<5>{
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth]{images/randomMemories/09.png}
+    \caption{\(n=30\), \(\beta_i=700\), \(\beta_f=500\), \(\text{lr}=1.0\), \(\text{lr}_\text{decay}=0.99\), Interaction Function=Leaky Rectified Polynomial, \(\text{Momentum}=0.6\), \(\text{Error Power}=2\)}
+    \end{figure}
+}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{Gridsearch of Hyperparameters}
+    Let's find what (if any) hyperparameters work. Training our network on autoassociative tasks of dimension 100.
+\end{frame}
+
+%------------------------------------------------
