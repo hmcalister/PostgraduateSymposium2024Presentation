@@ -1,13 +1,68 @@
 % --------------------------------------------------------------------------------
 
 \section{Behavior of the Modern Hopfield Network}
+
+% --------------------------------------------------------------------------------
+
 \begin{frame}
 	
-\frametitle{Objectives}
+\frametitle{Properties -- Network Capacity}
 
-You may list the objectives here\\~\\
+Larger network capacities with higher interaction vertices:
+\begin{align}
+    K_{\text{max}} = \frac{1}{2\left(2n-3\right)!!} \frac{N^{n-1}}{\ln(N)}
+\end{align}
 
+Notably, super-linear for \(n>2\).
 
 \end{frame}
 
 % --------------------------------------------------------------------------------
+
+\begin{frame}
+    \frametitle{Properties -- Training Times}
+
+Faster training times with higher interaction vertices:
+\begin{figure}
+    \includegraphics[width=\textwidth]{images/trainingTimes.png}
+    \caption{Krotov and Hopfield 2016, Figure 01}
+\end{figure}
+\end{frame}
+
+% --------------------------------------------------------------------------------
+
+\begin{frame}
+    \frametitle{Properties -- Feature to Prototype Transition}
+
+Low interaction vertices result in memories that look like features, while higher interaction vertices result in memories that look like prototypes:
+
+\begin{columns}
+    \column{.5\textwidth}
+    \begin{figure}
+        % TODO
+        % \includegraphics[width=\textwidth]{images/randomMemories/00.png}
+    \caption{Feature-like Memories, \(n=2\)}
+    \end{figure}
+    \column{.5\textwidth}
+    \only<1>{
+        \begin{figure}
+        \includegraphics[width=\textwidth]{images/randomMemories/01.png}
+        \caption{Prototype-like Memories, \(n=20\)}
+        \end{figure}
+    }
+    \only<2>{
+        \begin{figure}
+        \includegraphics[width=\textwidth]{images/randomMemories/02.png}
+        \caption{Prototype-like Memories, \(n=20\)}
+        \end{figure}
+    }
+    \only<3>{
+        \begin{figure}
+        \includegraphics[width=\textwidth]{images/randomMemories/03.png}
+        \caption{Prototype-like Memories, \(n=20\)}
+        \end{figure}
+    }
+    
+\end{columns}
+
+\end{frame}
