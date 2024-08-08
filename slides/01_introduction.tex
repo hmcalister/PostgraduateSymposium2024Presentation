@@ -121,7 +121,33 @@
     \begin{columns}[c]
         \column{.6\textwidth}
         \begin{itemize}
-            \item Classical energy wells are too shallow.
+            \item Classical energy wells are too shallow.          
+        \end{itemize}
+        
+        
+
+        \column{.4\textwidth}
+        \only<1>{
+            \begin{figure}[h]
+                \includegraphics[width=\textwidth]{images/introduction_energywell01.png}
+            \end{figure}
+        }
+        \only<2>{
+            \begin{figure}[h]
+                \includegraphics[width=\textwidth]{images/introduction_energywell02.png}
+            \end{figure}
+        }
+        
+    \end{columns}
+\end{frame}
+
+% --------------------------------------------------------------------------------
+
+\begin{frame}
+    \frametitle{Modern Hopfield Network}
+    \begin{columns}[c]
+        \column{.6\textwidth}
+        \begin{itemize}
             \item Key trick: Replace quadratic energy with general polynomial.
             \begin{itemize}
                 \item Heck, anything with a vaguely polynomial shape.
@@ -141,22 +167,9 @@
         \end{align*}
 
         \column{.4\textwidth}
-        \only<1>{
-            \begin{figure}[h]
-                \includegraphics[width=\textwidth]{images/introduction_energywell01.png}
-            \end{figure}
-        }
-        \only<2>{
-            \begin{figure}[h]
-                \includegraphics[width=\textwidth]{images/introduction_energywell02.png}
-            \end{figure}
-        }
-        \only<3>{
-            \begin{figure}[h]
-                \includegraphics[width=\textwidth]{images/introduction_energywell03.png}
-            \end{figure}
-        }
-        
+        \begin{figure}[h]
+            \includegraphics[width=\textwidth]{images/introduction_energywell03.png}
+        \end{figure}
     \end{columns}
 \end{frame}
 
