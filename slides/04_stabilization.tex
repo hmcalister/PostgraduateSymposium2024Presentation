@@ -13,3 +13,41 @@
 
 \end{frame}
 
+%------------------------------------------------
+
+\begin{frame}
+    \frametitle{Network Dynamics Step by Step}
+    \begin{gather*}
+        \tanh \left[ \beta \sum_{\mu} \left( f_n \left(\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) - f_n \left( -\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) \right]
+    \end{gather*}
+
+    \begin{enumerate}
+        \item Calculate similarities \(\zeta \cdot \xi_{+1}, \; \zeta \cdot \xi_{-1}\)
+        \item Pass similarities through interaction function \(f_n\)
+        \item Sum the result over all memories \(\sum_\mu\)
+        \item Multiply by a scaling factor \(\beta\)
+        \item Pass through activation function (e.g. Sign or tanh)
+    \end{enumerate}
+
+    \only<2>{
+        \begin{align*}
+            f_n\left(x\right) = x^n
+        \end{align*}
+    }
+
+    \only<3>{
+        \begin{align*}
+            \zeta, \xi \in [-1,1]^N &\implies \zeta \cdot \xi \in [-N, N] \\
+            f_n\left(\zeta \cdot \xi\right) &= \left(\zeta \cdot \xi\right)^n 
+        \end{align*}
+    }
+
+    \only<4>{
+        \begin{align*}
+            \zeta, \xi \in [-1,1]^N &\implies \zeta \cdot \xi \in [-N, N] \\
+            f_n\left(\zeta \cdot \xi\right) &= \left(\zeta \cdot \xi\right)^n \\
+                &= N^n
+        \end{align*}
+    }
+
+\end{frame}
