@@ -71,4 +71,63 @@
     \end{block}
     
 \end{frame}
+
+\begin{frame}
+    \frametitle{How large is too large?}
+
+    \begin{center}
+        \begin{tabular}{| c | c |}
+            \hline
+            Network parameters & Interaction function value \\
+            \hline
+            \hline
+            \(N=100, n=2\) & \(10^{4}\) \\
+            \hline
+            \(N=100, n=5\) & \(10^{10}\) \\
+            \hline
+            \(N=100, n=10\) & \(10^{18.89}\) \\
+            \hline
+            \(N=100, n=20\) & \(10^{40}\) \\
+            \hline
+        \end{tabular}
+    \end{center}
+
+    \pause
+    Maximum value of a float32 is \(\approx 3.4 \cdot 10^{38}\). Default data type of PyTorch.
+
+    \pause
+    Maximum value of a float64 is \(\approx 1.8 \cdot 10^{304}\). Default data type of numpy.
+\end{frame}
     
+
+\begin{frame}
+    \frametitle{Fixing the Problem}
+    \only<1>{
+        \begin{gather*}
+            \tanh \left[ \beta \sum_{\mu} \left( f_n \left(\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) - f_n \left( -\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) \right]
+        \end{gather*}
+    }
+    \only<2>{
+        \begin{gather*}
+            \tanh \left[ \textcolor{red}{\boldsymbol \beta} \sum_{\mu} \left( f_n \left(\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) - f_n \left( -\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) \right]
+        \end{gather*}
+    }
+    \only<3>{
+        \begin{gather*}
+            \tanh \left[ \sum_{\mu} \left( \textcolor{red}{\boldsymbol \beta} f_n \left(\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) - \textcolor{red}{\boldsymbol \beta} f_n \left( -\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) \right]
+        \end{gather*}
+    }
+    \only<4>{
+        \begin{gather*}
+            \tanh \left[ \sum_{\mu} \left( f_n \left(\textcolor{red}{\boldsymbol \beta} \left(\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) - f_n \left(\textcolor{red}{\boldsymbol \beta} \left( -\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) \right) \right]
+        \end{gather*}
+
+        if \(f_n\) is homogenous: \(f(\alpha x) = \alpha^k f(x)\).
+    }
+
+    \only<5>{
+        \begin{gather*}
+            \tanh \left[ \sum_{\mu} \left( f_n \left(\frac{\textcolor{red}{\boldsymbol \beta}}{N} \left(\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) - f_n \left(\frac{\textcolor{red}{\boldsymbol \beta}}{N} \left( -\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) \right) \right]
+        \end{gather*}
+    }
+\end{frame}
