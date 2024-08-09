@@ -2,16 +2,16 @@
 
 % --------------------------------------------------------------------------------
 
-\begin{frame}
-\frametitle{Stabilizing the Network}
+% \begin{frame}
+% \frametitle{Stabilizing the Network}
 
-\begin{itemize}
-    \item The optimal hyperparameter region shrinks as \(n\) grows.
-    \item The optimal region also shifts considerably as \(n\) grows.
-    \item When \(n\) reaches some critical threshold, the optimal region is disrupted and the network does not learn at all.
-\end{itemize}
+% \begin{itemize}
+%     \item The optimal hyperparameter region shrinks as \(n\) grows.
+%     \item The optimal region also shifts considerably as \(n\) grows.
+%     \item When \(n\) reaches some critical threshold, the optimal region is disrupted and the network does not learn at all.
+% \end{itemize}
 
-\end{frame}
+% \end{frame}
 
 %------------------------------------------------
 
@@ -22,8 +22,10 @@
     \end{gather*}
 
     \begin{enumerate}
-        \item Calculate similarities \(\zeta \cdot \xi_{+1}, \; \zeta \cdot \xi_{-1}\)
-        \item Pass similarities through interaction function \(f_n\)
+        \only<1,2>{\item Calculate similarities \(\zeta \cdot \xi_{+1}, \; \zeta \cdot \xi_{-1}\)}
+        \only<3->{\item \textbf{Calculate similarities \(\zeta \cdot \xi_{+1}, \; \zeta \cdot \xi_{-1}\)}}
+        \only<1>{\item Pass similarities through interaction function \(f_n\)}
+        \only<2->{\item \textbf{Pass similarities through interaction function \(f_n\)}}
         \item Sum the result over all memories \(\sum_\mu\)
         \item Multiply by a scaling factor \(\beta\)
         \item Pass through activation function (e.g. Sign or tanh)
@@ -38,11 +40,17 @@
     \only<3>{
         \begin{align*}
             \zeta, \xi \in [-1,1]^N &\implies \zeta \cdot \xi \in [-N, N] \\
-            f_n\left(\zeta \cdot \xi\right) &= \left(\zeta \cdot \xi\right)^n 
         \end{align*}
     }
 
     \only<4>{
+        \begin{align*}
+            \zeta, \xi \in [-1,1]^N &\implies \zeta \cdot \xi \in [-N, N] \\
+            f_n\left(\zeta \cdot \xi\right) &= \left(\zeta \cdot \xi\right)^n 
+        \end{align*}
+    }
+
+    \only<5>{
         \begin{align*}
             \zeta, \xi \in [-1,1]^N &\implies \zeta \cdot \xi \in [-N, N] \\
             f_n\left(\zeta \cdot \xi\right) &= \left(\zeta \cdot \xi\right)^n \\
@@ -50,26 +58,6 @@
         \end{align*}
     }
 
-\end{frame}
-
-\begin{frame}
-    \frametitle{Stabilizing the Network}
-    
-    \begin{itemize}
-        \item The optimal hyperparameter region shrinks as \(n\) grows.
-        \item The optimal region also shifts considerably as \(n\) grows.
-        \item When \(n\) reaches some critical threshold, the optimal region is disrupted and the network does not learn at all.
-        \pause
-        \item Prototype memories align strongly with states, and are formed when the interaction vertex is large.
-        \pause
-        \item When memories and states align strongly, the similarity will be large and made larger by the interaction function.
-    \end{itemize}
-    
-    \pause
-    \begin{block}{}
-        When the interaction vertex is large, similarity scores are learned to be large, and the interaction function makes those values even larger!
-    \end{block}
-    
 \end{frame}
 
 \begin{frame}
@@ -98,6 +86,22 @@
     \pause
     Maximum value of a float64 is \(\approx 1.8 \cdot 10^{304}\). Default data type of numpy.
 \end{frame}
+
+\begin{frame}
+    \frametitle{Stabilizing the Network}
+    
+    \begin{itemize}
+        \item The optimal hyperparameter region shrinks as \(n\) grows.
+        \pause
+        \item The optimal region also shifts considerably as \(n\) grows.
+        \pause
+        \item When \(n\) reaches some critical threshold, the optimal region is disrupted and the network does not learn at all.
+        \pause
+        \begin{itemize}
+            \item This is because the memories are learned to be prototypes for large \(n\), which have large similarities scores with the probe states, and are made larger by the interaction function.
+        \end{itemize}
+    \end{itemize}    
+\end{frame}
     
 
 \begin{frame}
@@ -121,13 +125,19 @@
         \begin{gather*}
             \tanh \left[ \sum_{\mu} \left( f_n \left(\textcolor{red}{\boldsymbol \beta} \left(\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) - f_n \left(\textcolor{red}{\boldsymbol \beta} \left( -\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) \right) \right]
         \end{gather*}
-
-        if \(f_n\) is homogenous: \(f(\alpha x) = \alpha^k f(x)\).
+        \begin{center}
+            If \(f_n\) is homogenous: \(f(\alpha x) = \alpha^k f(x)\). \\
+            Weaker than linear -- includes Polynomial and Rectified Polynomial.
+        \end{center}
     }
 
     \only<5>{
         \begin{gather*}
-            \tanh \left[ \sum_{\mu} \left( f_n \left(\frac{\textcolor{red}{\boldsymbol \beta}}{N} \left(\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) - f_n \left(\frac{\textcolor{red}{\boldsymbol \beta}}{N} \left( -\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) \right) \right]
+            \tanh \left[ \sum_{\mu} \left( f_n \left(\textcolor{red}{\frac{\boldsymbol \beta}{N}} \left(\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) - f_n \left(\textcolor{red}{\frac{\boldsymbol \beta}{N}} \left( -\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) \right) \right]
         \end{gather*}
+        \begin{center}
+            If \(f_n\) is homogenous: \(f(\alpha x) = \alpha^k f(x)\). \\
+            Weaker than linear -- includes Polynomial and Rectified Polynomial.
+        \end{center}
     }
 \end{frame}
