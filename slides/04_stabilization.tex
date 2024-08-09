@@ -51,3 +51,24 @@
     }
 
 \end{frame}
+
+\begin{frame}
+    \frametitle{Stabilizing the Network}
+    
+    \begin{itemize}
+        \item The optimal hyperparameter region shrinks as \(n\) grows.
+        \item The optimal region also shifts considerably as \(n\) grows.
+        \item When \(n\) reaches some critical threshold, the optimal region is disrupted and the network does not learn at all.
+        \pause
+        \item Prototype memories align strongly with states, and are formed when the interaction vertex is large.
+        \pause
+        \item When memories and states align strongly, the similarity will be large and made larger by the interaction function.
+    \end{itemize}
+    
+    \pause
+    \begin{block}{}
+        When the interaction vertex is large, similarity scores are learned to be large, and the interaction function makes those values even larger!
+    \end{block}
+    
+\end{frame}
+    
