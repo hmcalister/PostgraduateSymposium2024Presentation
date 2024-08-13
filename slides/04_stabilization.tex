@@ -84,7 +84,7 @@
     Maximum value of a float32 is \(\approx 3.4 \cdot 10^{38}\). Default data type of PyTorch.
 
     \pause
-    Maximum value of a float64 is \(\approx 1.8 \cdot 10^{304}\). Default data type of numpy.
+    Maximum value of a float64 is \(\approx 1.8 \cdot 10^{304}\). Default data type of NumPy.
 \end{frame}
 
 \begin{frame}
@@ -98,7 +98,9 @@
         \item When \(n\) reaches some critical threshold, the optimal region is disrupted and the network does not learn at all.
         \pause
         \begin{itemize}
-            \item This is because the memories are learned to be prototypes for large \(n\), which have large similarities scores with the probe states, and are made larger by the interaction function.
+            \item Large \(n\) makes prototype memories.
+            \item Prototype memories have high similarities.
+            \item High similarities and large \(n\) causes overflow.
         \end{itemize}
     \end{itemize}    
 \end{frame}
