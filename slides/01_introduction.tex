@@ -201,7 +201,7 @@
         \end{itemize}
     \end{block}
 
-        \only<2>{
+        \only<1>{
             Memory matrix replaced by list of memory states -- vectors of same dimension as data.
             
             \begin{center}
@@ -223,7 +223,7 @@
             \end{center}
         }
         
-        \only<3>{
+        \only<2>{
             Relaxation no longer uses mean field -- now a contrastive difference.
             \begin{itemize}
                 \item Negative energy no longer means ``stable'' -- the energy \textit{difference} between a neuron clamped on and off indicates stability.
@@ -260,23 +260,13 @@
             
         }
 
-        \only<4>{
+        \only<3>{
             Learning no longer supports Hebbian -- now requires gradient descent.
 
             \begin{gather*}
              W = \sum_{k} \xi_k \otimes \xi_k \\
              \text{Loss}\left( \xi \right) = \tanh \left[ \beta \sum_{\mu} \left( f_n \left(\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) - f_n \left( -\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) \right]
             \end{gather*}
-        }
-
-        % \only<5>{
-        %     Learning no longer supports Hebbian -- now requires gradient descent.
-
-        %     \begin{gather*}
-        %      W = \sum_{k} \xi_k \otimes \xi_k \\
-        %      \text{Loss}\left( \xi \right) = \tanh \left[ \textcolor{red}{\boldsymbol \beta} \sum_{\mu} \left( f_n \left(\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) - f_n \left( -\zeta_{\mu, i} + \sum_{j \neq i} \zeta_{\mu, j} \xi_{j} \right) \right) \right]
-        %     \end{gather*}
-        % }
-        
+        }       
     
 \end{frame}
