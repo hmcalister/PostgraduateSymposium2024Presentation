@@ -22,35 +22,35 @@
     \end{gather*}
 
     \begin{enumerate}
-        \only<1,2>{\item Calculate similarities \(\zeta \cdot \xi_{+1}, \; \zeta \cdot \xi_{-1}\)}
-        \only<3->{\item \textbf{Calculate similarities \(\zeta \cdot \xi_{+1}, \; \zeta \cdot \xi_{-1}\)}}
-        \only<1>{\item Pass similarities through interaction function \(f_n\)}
-        \only<2->{\item \textbf{Pass similarities through interaction function \(f_n\)}}
+        \only<1>{\item Calculate similarities \(\zeta \cdot \xi_{+1}, \; \zeta \cdot \xi_{-1}\)}
+        \only<2->{\item \textbf{Calculate similarities \(\zeta \cdot \xi_{+1}, \; \zeta \cdot \xi_{-1}\)}}
+        \only<1,2>{\item Pass similarities through interaction function \(f_n\)}
+        \only<3->{\item \textbf{Pass similarities through interaction function \(f_n\)}}
         \item Sum the result over all memories \(\sum_\mu\)
         \item Multiply by a scaling factor \(\beta\)
         \item Pass through activation function (e.g. Sign or tanh)
     \end{enumerate}
 
+    % \only<2>{
+    %     \begin{align*}
+    %         f_n\left(x\right) = x^n
+    %     \end{align*}
+    % }
+
     \only<2>{
         \begin{align*}
-            f_n\left(x\right) = x^n
+            \zeta, \xi \in [-1,1]^N &\implies \zeta \cdot \xi \in [-N, N] \\
         \end{align*}
     }
 
     \only<3>{
         \begin{align*}
             \zeta, \xi \in [-1,1]^N &\implies \zeta \cdot \xi \in [-N, N] \\
-        \end{align*}
-    }
-
-    \only<4>{
-        \begin{align*}
-            \zeta, \xi \in [-1,1]^N &\implies \zeta \cdot \xi \in [-N, N] \\
             f_n\left(\zeta \cdot \xi\right) &= \left(\zeta \cdot \xi\right)^n 
         \end{align*}
     }
 
-    \only<5>{
+    \only<4>{
         \begin{align*}
             \zeta, \xi \in [-1,1]^N &\implies \zeta \cdot \xi \in [-N, N] \\
             f_n\left(\zeta \cdot \xi\right) &= \left(\zeta \cdot \xi\right)^n \\
@@ -80,30 +80,32 @@
         \end{tabular}
     \end{center}
 
-    \pause
-    Maximum value of a float32 is \(\approx 3.4 \cdot 10^{38}\). Default data type of PyTorch.
-
-    \pause
-    Maximum value of a float64 is \(\approx 1.8 \cdot 10^{304}\). Default data type of NumPy.
+    \begin{center}
+        \pause
+        Maximum value of a float32 is \(\approx 3.4 \cdot 10^{38}\).
+        
+        \pause
+        Maximum value of a float64 is \(\approx 1.8 \cdot 10^{304}\).
+    \end{center}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Stabilizing the Network}
+% \begin{frame}
+%     \frametitle{Stabilizing the Network}
     
-    \begin{itemize}
-        \item When \(n\) reaches some critical threshold, the optimal region is disrupted and the network does not learn at all.
-        % \pause
-        % \begin{itemize}
-        %     \item Large \(n\) makes prototype memories.
-        %     \item Prototype memories have high similarities.
-        %     \item High similarities and large \(n\) causes overflow.
-        % \end{itemize}
-        \pause
-        \item The optimal hyperparameter region shrinks as \(n\) grows.
-        \pause
-        \item The optimal region also shifts considerably as \(n\) grows.
-    \end{itemize}    
-\end{frame}
+%     \begin{itemize}
+%         \item When \(n\) reaches some critical threshold, the optimal region is disrupted and the network does not learn at all.
+%         % \pause
+%         % \begin{itemize}
+%         %     \item Large \(n\) makes prototype memories.
+%         %     \item Prototype memories have high similarities.
+%         %     \item High similarities and large \(n\) causes overflow.
+%         % \end{itemize}
+%         \pause
+%         \item The optimal hyperparameter region shrinks as \(n\) grows.
+%         \pause
+%         \item The optimal region also shifts considerably as \(n\) grows.
+%     \end{itemize}    
+% \end{frame}
     
 
 \begin{frame}
@@ -139,7 +141,9 @@
         \end{gather*}
         \begin{center}
             If \(f_n\) is homogenous: \(f(\alpha x) = \alpha^k f(x)\). \\
-            Weaker than linear -- includes Polynomial and Rectified Polynomial.
+            Weaker than linear -- includes Polynomial and Rectified Polynomial.\\
+            ~\\
+            Provably doesn't alter network properties (e.g. capacity)
         \end{center}
     }
 \end{frame}
