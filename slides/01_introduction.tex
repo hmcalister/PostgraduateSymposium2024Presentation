@@ -11,20 +11,45 @@
     \item Relax probe towards a learned state.
 \end{itemize}
 
-\begin{center}
-\begin{tikzpicture}
-    \draw (0,0) rectangle (1,4);
-    \node at (0.5,2) {$\xi^\prime$};
-    \draw[thick, ->] (1.05,2) --(1.95,2);
+\only<1> {
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,0) rectangle (1,4);
+            \node at (0.5,2) {$\xi^\prime$};
+            \draw[thick, ->] (1.05,2) --(1.95,2);
+        
+            \filldraw[fill=\fillColor, draw=black] (2,0) rectangle (6,4);
+            \node[align=center] at (4,2) {Autoassociative\\Memory};
+            
+            \draw (7,0) rectangle (8,4);
+            \node at (7.5,2) {$\xi$};
+            \draw[thick, ->] (6.05,2) --(6.95,2);
+        \end{tikzpicture}
+    \end{center}
+}
 
-    \filldraw[fill=\fillColor, draw=black] (2,0) rectangle (6,4);
-    \node[align=center] at (4,2) {Autoassociative\\Memory};
-    
-    \draw (7,0) rectangle (8,4);
-    \node at (7.5,2) {$\xi$};
-    \draw[thick, ->] (6.05,2) --(6.95,2);
-\end{tikzpicture}
-\end{center}
+\only<2> {
+    \begin{center}
+    \begin{tikzpicture}
+        \draw (0,0) rectangle (1,4);
+        \node at (0.5,2) {$\xi^\prime$};
+        \draw[thick, ->] (1.05,2) --(1.95,2);
+        
+        \pgfmathtruncatemacro{\numNodes}{7}
+        \pgfmathsetmacro{\networkRadius}{1.95}
+        \foreach \t in {1,...,\numNodes}{
+            \foreach \u in {\t,...,\numNodes} {
+                \draw[thick, ->] ({\networkRadius * sin(360 / \numNodes * \t)+4},{\networkRadius * cos(360 / \numNodes * \t)+2}) --({\networkRadius * sin(360 / \numNodes * \u)+4},{\networkRadius * cos(360 / \numNodes * \u)+2});
+            }
+            \filldraw [fill=\fillColor, draw=black] ({\networkRadius * sin(360 / \numNodes * \t)+4},{\networkRadius * cos(360 / \numNodes * \t)+2}) circle (6pt);
+        }
+        
+        \draw (7,0) rectangle (8,4);
+        \node at (7.5,2) {$\xi$};
+        \draw[thick, ->] (6.05,2) --(6.95,2);
+    \end{tikzpicture}
+    \end{center}
+}
 
 % \only<1>{
 % \begin{center}
